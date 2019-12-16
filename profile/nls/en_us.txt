@@ -1,0 +1,13 @@
+# controller
+ND-controller-NAME = ISY Inventory
+CMD-ctl-QUERY"-NAME = Query
+CMD-ctl-DISCOVER-NAME = Re-Discover
+CMD-ctl-UPDATE_PROFILE-NAME = Update Profile
+CMD-ctl-REMOVE_NOTICES_ALL-NAME = Remove All Notices
+CMD-ctl-REMOVE_NOTICE_TEST-NAME = Remove Notice Test
+ST-ctl-ST-NAME = Total Nodes
+ST-ctl-GV0-NAME = Scenes
+ST-ctl-GV1-NAME = Insteon
+ST-ctl-GV2-NAME = Z-Wave
+ST-ctl-GV3-NAME = NodeServers
+ST-ctl-GV4-NAME = Online

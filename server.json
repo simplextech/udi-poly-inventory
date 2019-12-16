@@ -1,0 +1,23 @@
+{
+    "name": "ISY-Inventory",
+    "docs": "https://github.com/simplextech/udi-poly-inventory",
+    "type": "python3",
+    "executable": "inventory-poly.py",
+    "install": "install.sh",
+    "description": "ISY Inventory Display",
+    "notice": "",
+    "shortPoll": "86400",
+    "longPoll": "240",
+    "testMode": false,
+    "profile_version": "0.0.1",
+    "credits": [
+        {
+            "title": "ISY-Inventory: ISY Inventory",
+            "author": "Simplex Technology",
+            "version": "0.0.1",
+            "date": "December 16, 2019",
+            "source": "https://github.com/simplextech/udi-poly-inventory",
+            "license": "https://github.com/simplextech/udi-poly-inventory/blob/master/LICENSE"
+        }
+    ]
+}
