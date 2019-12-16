@@ -38,25 +38,39 @@ class Controller(polyinterface.Controller):
         self.discover()
 
     def discover(self, *args, **kwargs):
-        isy_url = "http://" + self.isy_ip + "/rest/nodes"
-        r = requests.get(isy_url, auth=HTTPBasicAuth(self.user, self.password))
-        root = ET.fromstring(r.content)
+        nodes_url = "http://" + self.isy_ip + "/rest/nodes"
+        ivars_url = "http://" + self.isy_ip + "/rest/vars/get/1"
+        svars_url = "http://" + self.isy_ip + "/rest/vars/get/2"
+        prog_url = "http://" + self.isy_ip + "/rest/programs?subfolders=true" \
+                                             ""
+        node_resp = requests.get(nodes_url, auth=HTTPBasicAuth(self.user, self.password))
+        node_root = ET.fromstring(node_resp.content)
+
+        ivars_resp = requests.get(ivars_url, auth=HTTPBasicAuth(self.user, self.password))
+        ivars_root = ET.fromstring(ivars_resp.content)
+
+        svars_resp = requests.get(svars_url, auth=HTTPBasicAuth(self.user, self.password))
+        svars_root = ET.fromstring(svars_resp.content)
+
+        prog_resp = requests.get(prog_url, auth=HTTPBasicAuth(self.user, self.password))
+        prog_root = ET.fromstring(prog_resp.content)
 
         node_count = 0
         scene_count = 0
         insteon_count = 0
         zwave_count = 0
         ns_count = 0
+        ivars_count = 0
+        svars_count = 0
+        prog_count = 0
 
-        for node in root.iter('node'):
-            # addr = node.find('address').text
+        for node in node_root.iter('node'):
             node_count += 1
 
-        for node in root.iter('group'):
-            # addr = node.find('address').text
+        for node in node_root.iter('group'):
             scene_count += 1
 
-        for node in root.iter('node'):
+        for node in node_root.iter('node'):
             addr = node.find('address').text
             if re.match(r'^ZW\d+\w+', addr):
                 zwave_count += 1
@@ -65,18 +79,33 @@ class Controller(polyinterface.Controller):
             else:
                 insteon_count += 1
 
+        for ivar in ivars_root.iter('var'):
+            ivars_count += 1
+
+        for svar in svars_root.iter('var'):
+            svars_count += 1
+
+        for prog in prog_root.iter('program'):
+            prog_count += 1
+
         LOGGER.info("Total Nodes: " + str(node_count))
         LOGGER.info("Scene Count: " + str(scene_count))
         LOGGER.info("Insteon Count: " + str(insteon_count))
         LOGGER.info("Z-Wave Count: " + str(zwave_count))
         LOGGER.info("NodeServers Count: " + str(ns_count))
+        LOGGER.info("Int Variables Count: " + str(ivars_count))
+        LOGGER.info("State Variables Count: " + str(svars_count))
+        LOGGER.info("Programs Count: " + str(prog_count))
 
         self.setDriver('ST', node_count)
+        self.setDriver('GPV', 1)
         self.setDriver('GV0', scene_count)
         self.setDriver('GV1', insteon_count)
         self.setDriver('GV2', zwave_count)
         self.setDriver('GV3', ns_count)
-        self.setDriver('GV4', 1)
+        self.setDriver('GV4', ivars_count)
+        self.setDriver('GV5', svars_count)
+        self.setDriver('GV6', prog_count)
 
     def delete(self):
         LOGGER.info('Removing ISY Inventory')
@@ -162,13 +191,17 @@ class Controller(polyinterface.Controller):
         'DISCOVER': discover,
         'UPDATE_PROFILE': update_profile,
     }
-    drivers = [{'driver': 'ST', 'value': 0, 'uom': 56},
-               {'driver': 'GV0', 'value': 0, 'uom': 56},
-               {'driver': 'GV1', 'value': 0, 'uom': 56},
-               {'driver': 'GV2', 'value': 0, 'uom': 56},
-               {'driver': 'GV3', 'value': 0, 'uom': 56},
-               {'driver': 'GV4', 'value': 1, 'uom': 2},
-               ]
+    drivers = [
+        {'driver': 'GPV', 'value': 1, 'uom': 2},
+        {'driver': 'ST', 'value': 0, 'uom': 56},
+        {'driver': 'GV0', 'value': 0, 'uom': 56},
+        {'driver': 'GV1', 'value': 0, 'uom': 56},
+        {'driver': 'GV2', 'value': 0, 'uom': 56},
+        {'driver': 'GV3', 'value': 0, 'uom': 56},
+        {'driver': 'GV4', 'value': 0, 'uom': 56},
+        {'driver': 'GV5', 'value': 0, 'uom': 56},
+        {'driver': 'GV6', 'value': 0, 'uom': 56},
+   ]
 
 
 if __name__ == "__main__":

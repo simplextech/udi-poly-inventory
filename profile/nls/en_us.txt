@@ -5,9 +5,13 @@ CMD-ctl-DISCOVER-NAME = Re-Discover
 CMD-ctl-UPDATE_PROFILE-NAME = Update Profile
 CMD-ctl-REMOVE_NOTICES_ALL-NAME = Remove All Notices
 CMD-ctl-REMOVE_NOTICE_TEST-NAME = Remove Notice Test
+ST-ctl-GPV-NAME = Online
 ST-ctl-ST-NAME = Total Nodes
 ST-ctl-GV0-NAME = Scenes
 ST-ctl-GV1-NAME = Insteon
 ST-ctl-GV2-NAME = Z-Wave
 ST-ctl-GV3-NAME = NodeServers
-ST-ctl-GV4-NAME = Online
+ST-ctl-GV4-NAME = Int Variables
+ST-ctl-GV5-NAME = State Variables
+ST-ctl-GV6-NAME = Programs
+

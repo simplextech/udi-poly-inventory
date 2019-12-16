@@ -9,7 +9,7 @@
     "shortPoll": "86400",
     "longPoll": "240",
     "testMode": false,
-    "profile_version": "0.0.1",
+    "profile_version": "0.0.2",
     "credits": [
         {
             "title": "ISY-Inventory: ISY Inventory",

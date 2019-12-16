@@ -4,12 +4,15 @@
     <nodeDef id="controller" nls="ctl">
         <editors />
         <sts>
+            <st id="GPV" editor="bool" hide="T" />
 			<st id="ST" editor="_56_0" />
             <st id="GV0" editor="_56_0" />
             <st id="GV1" editor="_56_0" />
             <st id="GV2" editor="_56_0" />
             <st id="GV3" editor="_56_0" />
-            <st id="GV4" editor="bool" hide="T" />
+            <st id="GV4" editor="_56_0" />
+            <st id="GV5" editor="_56_0" />
+            <st id="GV6" editor="_56_0" />
 		</sts>
         <cmds>
             <sends />
