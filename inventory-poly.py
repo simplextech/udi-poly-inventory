@@ -120,15 +120,15 @@ class Controller(polyinterface.Controller):
         LOGGER.info("process_config: Exit");
 
     def heartbeat(self, init=False):
-        LOGGER.debug('heartbeat: init={}'.format(init))
+        # LOGGER.debug('heartbeat: init={}'.format(init))
         if init is not False:
             self.hb = init
-        LOGGER.debug('heartbeat: hb={}'.format(self.hb))
+        # LOGGER.debug('heartbeat: hb={}'.format(self.hb))
         if self.hb == 0:
-            self.reportCmd("DON",2)
+            self.reportCmd("DON", 2)
             self.hb = 1
         else:
-            self.reportCmd("DOF",2)
+            self.reportCmd("DOF", 2)
             self.hb = 0
 
     def check_params(self):
