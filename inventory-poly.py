@@ -21,9 +21,12 @@ class Controller(polyinterface.Controller):
         self.user = None
         self.password = None
         self.isy_ip = None
+        self.debug_enable = 'False'
         self.poly.onConfig(self.process_config)
 
     def start(self):
+        if 'debug_enable' in self.polyConfig['customParams']:
+            self.debug_enable = self.polyConfig['customParams']['debug_enable']
         self.heartbeat(0)
         if self.check_params():
             self.discover()
@@ -41,11 +44,12 @@ class Controller(polyinterface.Controller):
         try:
             r = requests.get(url, auth=HTTPBasicAuth(self.user, self.password))
             if r.status_code == requests.codes.ok:
-                resp = r.json()
-                print(resp)
-                return resp
+                if self.debug_enable == 'True' or self.debug_enable == 'true':
+                    print(r.content)
+
+                return r.content
             else:
-                LOGGER.error("Withings.get_request:  " + r.json())
+                LOGGER.error("ISY-Inventory.get_request:  " + r.content)
                 return None
 
         except requests.exceptions.RequestException as e:
@@ -69,7 +73,7 @@ class Controller(polyinterface.Controller):
 
             node_resp = self.get_request(nodes_url)
             if node_resp is not None:
-                node_root = ET.fromstring(node_resp.content)
+                node_root = ET.fromstring(node_resp)
                 for node in node_root.iter('node'):
                     node_count += 1
 
@@ -86,19 +90,19 @@ class Controller(polyinterface.Controller):
                         insteon_count += 1
             ivars_resp = self.get_request(ivars_url)
             if ivars_resp is not None:
-                ivars_root = ET.fromstring(ivars_resp.content)
+                ivars_root = ET.fromstring(ivars_resp)
                 for ivar in ivars_root.iter('var'):
                     ivars_count += 1
 
             svars_resp = self.get_request(svars_url)
             if svars_resp is not None:
-                svars_root = ET.fromstring(svars_resp.content)
+                svars_root = ET.fromstring(svars_resp)
                 for svar in svars_root.iter('var'):
                     svars_count += 1
 
             progs_resp = self.get_request(progs_url)
             if progs_resp is not None:
-                progs_root = ET.fromstring(progs_resp.content)
+                progs_root = ET.fromstring(progs_resp)
                 for prog in progs_root.iter('program'):
                     progs_count += 1
 
@@ -178,7 +182,8 @@ class Controller(polyinterface.Controller):
             st = False
 
         # Make sure they are in the params
-        self.addCustomParam({'password': self.password, 'user': self.user, 'isy_ip': self.isy_ip})
+        self.addCustomParam({'password': self.password, 'user': self.user,
+                             'isy_ip': self.isy_ip, 'debug_enable': 'False'})
 
         # Add a notice if they need to change the user/password from the default.
         if self.user == default_user or self.password == default_password or self.isy_ip == default_isy_ip:
