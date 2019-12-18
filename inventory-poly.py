@@ -88,6 +88,7 @@ class Controller(polyinterface.Controller):
                         ns_count += 1
                     else:
                         insteon_count += 1
+
             ivars_resp = self.get_request(ivars_url)
             if ivars_resp is not None:
                 ivars_root = ET.fromstring(ivars_resp)
