@@ -106,14 +106,15 @@ class Controller(polyinterface.Controller):
                 for prog in progs_root.iter('program'):
                     progs_count += 1
 
-            LOGGER.info("Total Nodes: " + str(node_count))
-            LOGGER.info("Scene Count: " + str(scene_count))
-            LOGGER.info("Insteon Count: " + str(insteon_count))
-            LOGGER.info("Z-Wave Count: " + str(zwave_count))
-            LOGGER.info("NodeServers Count: " + str(ns_count))
-            LOGGER.info("Int Variables Count: " + str(ivars_count))
-            LOGGER.info("State Variables Count: " + str(svars_count))
-            LOGGER.info("Programs Count: " + str(progs_count))
+            if self.debug_enable == 'True' or self.debug_enable == 'true':
+                LOGGER.info("Total Nodes: " + str(node_count))
+                LOGGER.info("Scene Count: " + str(scene_count))
+                LOGGER.info("Insteon Count: " + str(insteon_count))
+                LOGGER.info("Z-Wave Count: " + str(zwave_count))
+                LOGGER.info("NodeServers Count: " + str(ns_count))
+                LOGGER.info("Int Variables Count: " + str(ivars_count))
+                LOGGER.info("State Variables Count: " + str(svars_count))
+                LOGGER.info("Programs Count: " + str(progs_count))
 
             self.setDriver('ST', node_count)
             self.setDriver('GPV', 1)
