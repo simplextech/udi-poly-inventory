@@ -117,15 +117,15 @@ class Controller(polyinterface.Controller):
                 LOGGER.info("State Variables Count: " + str(svars_count))
                 LOGGER.info("Programs Count: " + str(progs_count))
 
-            self.setDriver('ST', node_count)
+            self.setDriver('ST', node_count, force=True)
             self.setDriver('GPV', 1)
-            self.setDriver('GV0', scene_count)
-            self.setDriver('GV1', insteon_count)
-            self.setDriver('GV2', zwave_count)
-            self.setDriver('GV3', ns_count)
-            self.setDriver('GV4', ivars_count)
-            self.setDriver('GV5', svars_count)
-            self.setDriver('GV6', progs_count)
+            self.setDriver('GV0', scene_count, force=True)
+            self.setDriver('GV1', insteon_count, force=True)
+            self.setDriver('GV2', zwave_count, force=True)
+            self.setDriver('GV3', ns_count, force=True)
+            self.setDriver('GV4', ivars_count, force=True)
+            self.setDriver('GV5', svars_count, force=True)
+            self.setDriver('GV6', progs_count, force=True)
         else:
             LOGGER.info("ISY IP is not configured")
 
@@ -183,9 +183,12 @@ class Controller(polyinterface.Controller):
                 'check_params: ISY IP not defined in customParams, please add it.  Using {}'.format(self.isy_ip))
             st = False
 
+        if 'debug_enable' in self.polyConfig['customParams']:
+            self.debug_enable = self.polyConfig['customParams']['debug_enable']
+
         # Make sure they are in the params
         self.addCustomParam({'password': self.password, 'user': self.user,
-                             'isy_ip': self.isy_ip, 'debug_enable': 'False'})
+                             'isy_ip': self.isy_ip, 'debug_enable': self.debug_enable})
 
         # Add a notice if they need to change the user/password from the default.
         if self.user == default_user or self.password == default_password or self.isy_ip == default_isy_ip:
