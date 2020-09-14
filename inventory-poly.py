@@ -21,6 +21,7 @@ class Controller(polyinterface.Controller):
         self.user = None
         self.password = None
         self.isy_ip = None
+        self.isy_port = '80'
         self.debug_enable = 'False'
         self.poly.onConfig(self.process_config)
 
@@ -57,10 +58,10 @@ class Controller(polyinterface.Controller):
 
     def discover(self, *args, **kwargs):
         if self.isy_ip is not None:
-            nodes_url = "http://" + self.isy_ip + "/rest/nodes"
-            ivars_url = "http://" + self.isy_ip + "/rest/vars/get/1"
-            svars_url = "http://" + self.isy_ip + "/rest/vars/get/2"
-            progs_url = "http://" + self.isy_ip + "/rest/programs?subfolders=true"
+            nodes_url = "http://" + self.isy_ip + ":" + self.isy_port + "/rest/nodes"
+            ivars_url = "http://" + self.isy_ip + ":" + self.isy_port + "/rest/vars/get/1"
+            svars_url = "http://" + self.isy_ip + ":" + self.isy_port + "/rest/vars/get/2"
+            progs_url = "http://" + self.isy_ip + ":" + self.isy_port + "/rest/programs?subfolders=true"
 
             node_count = 0
             scene_count = 0
@@ -159,6 +160,7 @@ class Controller(polyinterface.Controller):
         default_user = "YourUserName"
         default_password = "YourPassword"
         default_isy_ip = "127.0.0.1"
+        default_isy_port = "80"
 
         if 'user' in self.polyConfig['customParams']:
             self.user = self.polyConfig['customParams']['user']
@@ -183,12 +185,20 @@ class Controller(polyinterface.Controller):
                 'check_params: ISY IP not defined in customParams, please add it.  Using {}'.format(self.isy_ip))
             st = False
 
+        if 'isy_port' in self.polyConfig['customParams']:
+            self.isy_port = self.polyConfig['customParams']['isy_port']
+        else:
+            self.isy_port = default_isy_port
+            LOGGER.error(
+                'check_params: ISY Port not defined in customParams, please add it. Using {}'.format(self_isy_port))
+            st = False
+
         if 'debug_enable' in self.polyConfig['customParams']:
             self.debug_enable = self.polyConfig['customParams']['debug_enable']
 
         # Make sure they are in the params
         self.addCustomParam({'password': self.password, 'user': self.user,
-                             'isy_ip': self.isy_ip, 'debug_enable': self.debug_enable})
+                             'isy_ip': self.isy_ip, 'is_port': self.isy_port, 'debug_enable': self.debug_enable})
 
         # Add a notice if they need to change the user/password from the default.
         if self.user == default_user or self.password == default_password or self.isy_ip == default_isy_ip:
