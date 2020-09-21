@@ -190,7 +190,7 @@ class Controller(polyinterface.Controller):
         else:
             self.isy_port = default_isy_port
             LOGGER.error(
-                'check_params: ISY Port not defined in customParams, please add it. Using {}'.format(self_isy_port))
+                'check_params: ISY Port not defined in customParams, please add it. Using {}'.format(self.isy_port))
             st = False
 
         if 'debug_enable' in self.polyConfig['customParams']:
@@ -198,7 +198,7 @@ class Controller(polyinterface.Controller):
 
         # Make sure they are in the params
         self.addCustomParam({'password': self.password, 'user': self.user,
-                             'isy_ip': self.isy_ip, 'is_port': self.isy_port, 'debug_enable': self.debug_enable})
+                             'isy_ip': self.isy_ip, 'isy_port': self.isy_port, 'debug_enable': self.debug_enable})
 
         # Add a notice if they need to change the user/password from the default.
         if self.user == default_user or self.password == default_password or self.isy_ip == default_isy_ip:
