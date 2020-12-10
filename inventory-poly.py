@@ -46,7 +46,7 @@ class Controller(polyinterface.Controller):
             r = requests.get(url, auth=HTTPBasicAuth(self.user, self.password))
             if r.status_code == requests.codes.ok:
                 if self.debug_enable == 'True' or self.debug_enable == 'true':
-                    print(r.content)
+                    LOGGER.debug(r.content)
 
                 return r.content
             else:
@@ -65,6 +65,7 @@ class Controller(polyinterface.Controller):
 
             node_count = 0
             scene_count = 0
+            folder_count = 0
             insteon_count = 0
             zwave_count = 0
             ns_count = 0
@@ -80,6 +81,9 @@ class Controller(polyinterface.Controller):
 
                 for node in node_root.iter('group'):
                     scene_count += 1
+
+                for node in node_root.iter('folder'):
+                    folder_count += 1
 
                 for node in node_root.iter('node'):
                     addr = node.find('address').text
@@ -117,8 +121,11 @@ class Controller(polyinterface.Controller):
                 LOGGER.info("Int Variables Count: " + str(ivars_count))
                 LOGGER.info("State Variables Count: " + str(svars_count))
                 LOGGER.info("Programs Count: " + str(progs_count))
+                LOGGER.info("Folders Count: " + str(folder_count))
 
-            self.setDriver('ST', node_count, force=True)
+            total_nodes_count = node_count + scene_count + folder_count
+
+            self.setDriver('ST', total_nodes_count, force=True)
             self.setDriver('GPV', 1)
             self.setDriver('GV0', scene_count, force=True)
             self.setDriver('GV1', insteon_count, force=True)
@@ -127,6 +134,7 @@ class Controller(polyinterface.Controller):
             self.setDriver('GV4', ivars_count, force=True)
             self.setDriver('GV5', svars_count, force=True)
             self.setDriver('GV6', progs_count, force=True)
+            self.setDriver('GV7', folder_count, force=True)
         else:
             LOGGER.info("ISY IP is not configured")
 
@@ -237,6 +245,7 @@ class Controller(polyinterface.Controller):
         {'driver': 'GV4', 'value': 0, 'uom': 56},
         {'driver': 'GV5', 'value': 0, 'uom': 56},
         {'driver': 'GV6', 'value': 0, 'uom': 56},
+        {'driver': 'GV7', 'value': 0, 'uom': 56},
    ]
 
 
