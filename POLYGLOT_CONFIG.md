@@ -10,6 +10,7 @@ the ISY.
   * Insteon
   * Z-Wave
   * NodeServer Nodes
+  * Folders
 
 ## Configuration
 #### Defaults
