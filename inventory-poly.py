@@ -44,13 +44,12 @@ class Controller(polyinterface.Controller):
     def get_request(self, url):
         try:
             r = requests.get(url, auth=HTTPBasicAuth(self.user, self.password))
-            if r.status_code == requests.codes.ok:
+            if r.status_code == 200:
                 if self.debug_enable == 'True' or self.debug_enable == 'true':
                     LOGGER.debug(r.content)
-
                 return r.content
             else:
-                LOGGER.error("ISY-Inventory.get_request:  " + r.content)
+                LOGGER.error("ISY-Inventory.get_request:  Failed")
                 return None
 
         except requests.exceptions.RequestException as e:
