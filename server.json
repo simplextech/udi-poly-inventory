@@ -14,7 +14,7 @@
         {
             "title": "ISY-Inventory: ISY Inventory",
             "author": "Simplex Technology",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "date": "December 16, 2019",
             "source": "https://github.com/simplextech/udi-poly-inventory",
             "license": "https://github.com/simplextech/udi-poly-inventory/blob/master/LICENSE"
