@@ -1,18 +1,12 @@
-# controller
-ND-controller-NAME = ISY Inventory
-CMD-ctl-QUERY"-NAME = Query
-CMD-ctl-DISCOVER-NAME = Re-Discover
-CMD-ctl-UPDATE_PROFILE-NAME = Update Profile
-CMD-ctl-REMOVE_NOTICES_ALL-NAME = Remove All Notices
-CMD-ctl-REMOVE_NOTICE_TEST-NAME = Remove Notice Test
-ST-ctl-GPV-NAME = Online
-ST-ctl-ST-NAME = Total Nodes
-ST-ctl-GV0-NAME = Scenes
-ST-ctl-GV1-NAME = Insteon
-ST-ctl-GV2-NAME = Z-Wave
-ST-ctl-GV3-NAME = NodeServer Nodes
-ST-ctl-GV4-NAME = Int Variables
-ST-ctl-GV5-NAME = State Variables
-ST-ctl-GV6-NAME = Programs
-ST-ctl-GV7-NAME = Folders
-
+ND-CONTROLLER-NAME = ISY Inventory
+CMD-CTL-DISCOVER-NAME = Discover
+ST-CTL-ST-NAME = Online
+ST-CTL-GV0-NAME = Total Nodes
+ST-CTL-GV1-NAME = Scenes
+ST-CTL-GV2-NAME = Insteon
+ST-CTL-GV3-NAME = Z-Wave
+ST-CTL-GV4-NAME = NodeServer Nodes
+ST-CTL-GV5-NAME = Int Variables
+ST-CTL-GV6-NAME = State Variables
+ST-CTL-GV7-NAME = Programs
+ST-CTL-GV8-NAME = Folders

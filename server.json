@@ -1,23 +1,29 @@
 {
-    "name": "ISY-Inventory",
-    "docs": "https://github.com/simplextech/udi-poly-inventory",
-    "type": "python3",
-    "executable": "inventory-poly.py",
-    "install": "install.sh",
-    "description": "ISY Inventory Display",
-    "notice": "",
-    "shortPoll": "86400",
-    "longPoll": "240",
-    "testMode": false,
-    "profile_version": "0.1.1",
-    "credits": [
-        {
-            "title": "ISY-Inventory: ISY Inventory",
-            "author": "Simplex Technology",
-            "version": "0.1.2",
-            "date": "December 16, 2019",
-            "source": "https://github.com/simplextech/udi-poly-inventory",
-            "license": "https://github.com/simplextech/udi-poly-inventory/blob/master/LICENSE"
-        }
-    ]
+  "name": "ISY Inventory",
+  "docs": "https://github.com/simplextech/udi-poly-inventory",
+  "type": "node",
+  "executable": "isy-inventory.js",
+  "install": "install.sh",
+  "description": "ISY Inventory NodeServer",
+  "notice": "",
+  "shortPoll": "300",
+  "longPoll": "600",
+  "profile_version": "1.0.0",
+  "logLevel": "INFO", 
+  "customParams": { 
+	  "Username": "", 
+	  "Password": "", 
+	  "IP_Address": "",
+    "ISY_Port": "80"
+},
+  "credits": [
+    {
+      "title": "ISY Inventory NodeServer",
+      "author": "Simplex Technology",
+      "version": "1.0.0",
+      "date": "December 29th, 2021",
+      "source": "https://github.com/simplextech/udi-poly-inventory",
+      "license": "MIT"
+    }
+  ]
 }

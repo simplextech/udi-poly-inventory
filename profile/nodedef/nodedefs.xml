@@ -1,27 +1,23 @@
 <nodeDefs>
-    <!-- NODE DEF from 5.0 document http://wiki.universal-devices.com/index.php?title=V50_MAIN -->
-    <!-- controller, this must mach the id in your Controller class-->
-    <nodeDef id="controller" nls="ctl">
-        <editors />
-        <sts>
-            <st id="GPV" editor="bool" hide="T" />
-			<st id="ST" editor="_56_0" />
-            <st id="GV0" editor="_56_0" />
-            <st id="GV1" editor="_56_0" />
-            <st id="GV2" editor="_56_0" />
-            <st id="GV3" editor="_56_0" />
-            <st id="GV4" editor="_56_0" />
-            <st id="GV5" editor="_56_0" />
-            <st id="GV6" editor="_56_0" />
-            <st id="GV7" editor="_56_0" />
-		</sts>
-        <cmds>
-            <sends />
-            <accepts>
-              <cmd id="QUERY" />
-              <cmd id="DISCOVER" />
-              <cmd id="UPDATE_PROFILE" />
-            </accepts>
-        </cmds>
-    </nodeDef>
+  <nodeDef id="CONTROLLER" nls="CTL">
+    <editors />
+    <sts>
+      <st id="ST" editor="_2_0" hide="T" />
+      <st id="GV0" editor="_56_0" />
+      <st id="GV1" editor="_56_0" />
+      <st id="GV2" editor="_56_0" />
+      <st id="GV3" editor="_56_0" />
+      <st id="GV4" editor="_56_0" />
+      <st id="GV5" editor="_56_0" />
+      <st id="GV6" editor="_56_0" />
+      <st id="GV7" editor="_56_0" />
+      <st id="GV8" editor="_56_0" />
+    </sts>
+      <cmds>
+        <sends />
+        <accepts>
+          <cmd id="DISCOVER" />
+        </accepts>
+      </cmds>
+  </nodeDef>
 </nodeDefs>
