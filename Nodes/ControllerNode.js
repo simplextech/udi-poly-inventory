@@ -39,20 +39,26 @@ module.exports = function(Polyglot) {
 
       let ip_address = this.polyInterface.getCustomParam('IP_Address');
       let isy_port = this.polyInterface.getCustomParam('ISY_Port');
-      let nodes_url = "http://" + ip_address + ":" + isy_port + "/rest/nodes"
-      let ivars_url = "http://" + ip_address + ":" + isy_port + "/rest/vars/get/1"
-      let svars_url = "http://" + ip_address + ":" + isy_port + "/rest/vars/get/2"
-      let progs_url = "http://" + ip_address + ":" + isy_port + "/rest/programs?subfolders=true"
 
-      let nodes = await this.getInv(nodes_url)
-      let ivars = await this.getInv(ivars_url);
-      let svars = await this.getInv(svars_url);
-      let progs = await this.getInv(progs_url);
-
-      this.processNodes(nodes);
-      this.processIvars(ivars);
-      this.processSvars(svars);
-      this.processPrograms(progs);
+      if (ip_address.length > 0 && isy_port.length > 0) {
+        let nodes_url = "http://" + ip_address + ":" + isy_port + "/rest/nodes"
+        let ivars_url = "http://" + ip_address + ":" + isy_port + "/rest/vars/get/1"
+        let svars_url = "http://" + ip_address + ":" + isy_port + "/rest/vars/get/2"
+        let progs_url = "http://" + ip_address + ":" + isy_port + "/rest/programs?subfolders=true"
+  
+        let nodes = await this.getInv(nodes_url)
+        let ivars = await this.getInv(ivars_url);
+        let svars = await this.getInv(svars_url);
+        let progs = await this.getInv(progs_url);
+  
+        this.processNodes(nodes);
+        this.processIvars(ivars);
+        this.processSvars(svars);
+        this.processPrograms(progs);
+      } else {
+        logger.info('Nodeserver Not Configured: Missing IP Address or Port');
+      }
+      
   
     }
 
@@ -60,14 +66,19 @@ module.exports = function(Polyglot) {
       let username = this.polyInterface.getCustomParam('Username');
       let password = this.polyInterface.getCustomParam('Password');
       
-      try {
-        const response = await axios.get(URL, {
-          auth: {username: username, password: password}
-        });
-        return response.data;
-      } catch (error) {
-        logger.error('getInv() Error: ' + URL);
+      if (username.length > 0 && password.length > 0) {
+        try {
+          const response = await axios.get(URL, {
+            auth: {username: username, password: password}
+          });
+          return response.data;
+        } catch (error) {
+          logger.error('getInv() Error: ' + URL);
+        }
+      } else {
+        logger.info('Nodeserver Not Configured: Missing Username or Password');
       }
+      
     }
 
     processNodes(xml) {

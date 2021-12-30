@@ -1,8 +1,6 @@
 
 # ISY Inventory
-
-The purpose of this Nodeserver is simply to display/report device/node inventory within
-the ISY.
+The purpose of this Nodeserver is simply to display/report device/node inventory within the ISY.
 
 * Supported Nodes
   * Total Nodes
@@ -10,6 +8,10 @@ the ISY.
   * Insteon
   * Z-Wave
   * NodeServer Nodes
+  * Integeger Variables
+  * State Variables
+  * Programs
+  * Folders
 
 ## Configuration
 #### Defaults
